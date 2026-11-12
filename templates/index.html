@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Junior Astronaut - Mars Mission</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script defer
+            src="{{ url_for('static', filename='js/app.js') }}">
+    </script>
+
+</head>
+
+<body>
+
+<header>
+
+    <h2>🚀 JUNIOR ASTRONAUT</h2>
+
+    <span>MARS HABITAT MISSION TRAINER</span>
+
+</header>
+
+
+<main>
+
+<section class="hero-screen">
+
+    <div class="hero-content">
+
+        <div class="game-label">
+            MARS EXPLORATION PROGRAM
+        </div>
+
+        <h1>
+            JUNIOR<br>
+            <span>ASTRONAUT</span>
+        </h1>
+
+        <p>
+            Your mission begins on Mars.
+            Manage resources, explore the planet
+            and keep your crew alive for seven days.
+        </p>
+
+        <button id="startBtn" class="start-game-btn">
+            🚀 START MISSION
+        </button>
+
+        <div class="hero-info">
+            MISSION DURATION: 7 DAYS
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="game" hidden>
+
+    <h2>
+        MISSION DASHBOARD
+        <span id="dayNumber">1</span>/7
+    </h2>
+
+    <!-- MARS EXPLORATION ENVIRONMENT -->
+
+<div class="game-world" id="gameWorld">
+
+    <!-- Background atmosphere -->
+
+    <div class="planet-label">
+        PLANET MARS
+        <span>SECTOR 04</span>
+    </div>
+
+    <!-- Habitat -->
+
+    <div class="habitat-object">
+        🏠
+        <small>MARS HABITAT</small>
+    </div>
+
+    <!-- Rover -->
+
+    <div class="rover-object">
+        🚙
+        <small>EXPLORATION ROVER</small>
+    </div>
+
+    <!-- Astronaut -->
+
+    <div id="astronaut" class="astronaut">
+
+        🧑‍🚀
+
+    </div>
+
+    <!-- Movement instructions -->
+
+    <div class="movement-info">
+
+        USE ARROW KEYS OR WASD TO MOVE
+
+    </div>
+
+    <!-- Movement buttons -->
+
+    <div class="movement-controls">
+
+        <button id="leftBtn">◀</button>
+
+        <button id="rightBtn">▶</button>
+
+    </div>
+
+</div>
+
+    <div class="resources">
+
+        <div class="card">
+
+            <h3>⚡ POWER</h3>
+
+            <h2 id="powerValue">100%</h2>
+
+            <div class="progress">
+                <div id="powerBar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🫧 OXYGEN</h3>
+
+            <h2 id="oxygenValue">100%</h2>
+
+            <div class="progress">
+                <div id="oxygenBar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>💧 WATER</h3>
+
+            <h2 id="waterValue">100%</h2>
+
+            <div class="progress">
+                <div id="waterBar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🥫 FOOD</h3>
+
+            <h2 id="foodValue">100%</h2>
+
+            <div class="progress">
+                <div id="foodBar"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h2>MISSION ACTIONS</h2>
+
+        <div class="actions">
+
+            <button data-action="conserve_energy">
+                🔋 Conserve Energy
+            </button>
+
+            <button data-action="repair_solar_panels">
+                ☀️ Repair Solar Panels
+            </button>
+
+            <button data-action="recycle_water">
+                💧 Recycle Water
+            </button>
+
+            <button data-action="grow_food">
+                🌱 Grow Food
+            </button>
+
+            <button data-action="inspect_equipment">
+                🛠 Inspect Equipment
+            </button>
+
+            <button data-action="improve_shielding">
+                🛡 Improve Shielding
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h2>MISSION UPDATE</h2>
+
+        <p id="feedbackText">
+            Welcome, commander!
+        </p>
+
+        <div id="eventBox" hidden></div>
+
+        <button id="advanceBtn">
+            END DAY →
+        </button>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h2>RESOURCE HISTORY</h2>
+
+        <canvas id="resourceChart"></canvas>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h2>MISSION LOG</h2>
+
+        <ul id="activityLog"></ul>
+
+    </div>
+
+</section>
+
+
+<section id="report" class="panel" hidden>
+
+    <h1 id="reportTitle">
+        MISSION REPORT
+    </h1>
+
+    <p id="reportSummary"></p>
+
+    <div id="reportResources"></div>
+
+    <h3>MISSION LESSONS</h3>
+
+    <ul id="lessonsList"></ul>
+
+    <h3>IMPORTANT EVENTS</h3>
+
+    <ul id="reportEvents"></ul>
+
+    <button id="restartBtn">
+        RESTART MISSION
+    </button>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Educational Mars Habitat Simulation |
+        NASA Image and Video Library
+    </p>
+
+</footer>
+
+</body>
+
+</html>

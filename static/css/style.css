@@ -1,0 +1,842 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    background: #111827;
+
+    color: white;
+
+}
+
+header {
+
+    background: #1f2937;
+
+    padding: 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+header span {
+
+    color: #f97316;
+
+    font-size: 13px;
+
+}
+
+main {
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: 30px auto;
+
+}
+
+.hero {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-bottom: 40px;
+
+}
+
+.hero h1 {
+
+    font-size: 38px;
+
+    color: #fb923c;
+
+    margin-bottom: 15px;
+
+}
+
+.hero p {
+
+    line-height: 1.7;
+
+    margin-bottom: 20px;
+
+}
+
+.hero img {
+
+    width: 45%;
+
+    border-radius: 15px;
+
+}
+
+button {
+
+    background: #f97316;
+
+    color: white;
+
+    border: none;
+
+    padding: 13px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    margin: 5px;
+
+}
+
+button:hover {
+
+    background: #ea580c;
+
+}
+
+button:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+}
+
+.resources {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin: 25px 0;
+
+}
+
+.card, .panel {
+
+    background: #1f2937;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+}
+
+.card h3 {
+
+    color: #fb923c;
+
+    font-size: 15px;
+
+}
+
+.card h2 {
+
+    margin: 15px 0;
+
+}
+
+.progress {
+
+    height: 10px;
+
+    background: #374151;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+.progress div {
+
+    height: 100%;
+
+    width: 100%;
+
+    background: #22c55e;
+
+    transition: width 0.4s;
+
+}
+
+.actions {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+}
+
+.actions button {
+
+    min-height: 55px;
+
+}
+
+.panel h2 {
+
+    margin-bottom: 18px;
+
+    color: #fb923c;
+
+}
+
+.panel p {
+
+    line-height: 1.7;
+
+}
+
+#eventBox {
+
+    background: #7c2d12;
+
+    padding: 15px;
+
+    margin: 15px 0;
+
+    border-radius: 8px;
+
+}
+
+#reportResources {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin: 25px 0;
+
+}
+
+#reportResources div {
+
+    background: #374151;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+}
+
+footer {
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #9ca3af;
+
+}
+
+@media(max-width: 750px) {
+
+    .hero {
+
+        flex-direction: column;
+
+    }
+
+    .hero img {
+
+        width: 100%;
+
+    }
+
+    .resources {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .actions {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    #reportResources {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+@media(max-width: 450px) {
+
+    header {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+}
+
+/* ==================================
+   GAMING INTERFACE
+================================== */
+
+body {
+
+    background: #100c12;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+/* ==================================
+   GAME HEADER
+================================== */
+
+header {
+
+    background: rgba(15, 10, 15, 0.95);
+
+    border-bottom: 1px solid #713c2d;
+
+    padding: 18px 30px;
+
+}
+
+header h2 {
+
+    color: #ff8c42;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ==================================
+   LANDING SCREEN
+================================== */
+
+.hero-screen {
+
+    min-height: 600px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 60px;
+
+    border-radius: 18px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(10, 8, 12, 0.95),
+            rgba(10, 8, 12, 0.3)
+        ),
+
+        url("/static/images/mars-landscape.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    margin-bottom: 35px;
+
+}
+
+.hero-content {
+
+    max-width: 550px;
+
+}
+
+.game-label {
+
+    color: #ff9b54;
+
+    letter-spacing: 4px;
+
+    font-size: 13px;
+
+    margin-bottom: 25px;
+
+}
+
+.hero-content h1 {
+
+    font-size: clamp(42px, 6vw, 70px);
+
+    line-height: 1.1;
+
+    color: white;
+
+    margin-bottom: 20px;
+
+}
+
+.hero-content h1 span {
+
+    color: #ff763c;
+
+}
+
+.hero-content p {
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #e5d5cd;
+
+    margin-bottom: 30px;
+
+}
+
+.start-game-btn {
+
+    background: linear-gradient(
+        90deg,
+        #ff6b35,
+        #e63d20
+    );
+
+    padding: 18px 35px;
+
+    font-size: 16px;
+
+    border-radius: 8px;
+
+    box-shadow: 0 0 25px rgba(255, 90, 30, 0.4);
+
+}
+
+.start-game-btn:hover {
+
+    transform: scale(1.05);
+
+}
+
+.hero-info {
+
+    margin-top: 25px;
+
+    font-size: 12px;
+
+    color: #ffb18b;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ==================================
+   MARS GAME ENVIRONMENT
+================================== */
+
+.game-world {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 470px;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    margin: 25px 0;
+
+    border: 2px solid #a64e36;
+
+    background-image:
+
+        linear-gradient(
+            180deg,
+            rgba(25, 15, 25, 0.05),
+            rgba(30, 10, 10, 0.15)
+        ),
+
+        url("/static/images/mars-landscape.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+}
+
+
+/* Mars label */
+
+.planet-label {
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 20px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: white;
+
+    text-shadow: 2px 2px 5px black;
+
+}
+
+.planet-label span {
+
+    display: block;
+
+    font-size: 11px;
+
+    color: #ffc09d;
+
+    margin-top: 5px;
+
+}
+
+
+/* Habitat */
+
+.habitat-object {
+
+    position: absolute;
+
+    right: 15%;
+
+    bottom: 100px;
+
+    font-size: 65px;
+
+    text-align: center;
+
+    filter: drop-shadow(0 5px 5px black);
+
+}
+
+.habitat-object small {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: white;
+
+}
+
+
+/* Rover */
+
+.rover-object {
+
+    position: absolute;
+
+    right: 38%;
+
+    bottom: 85px;
+
+    font-size: 45px;
+
+    text-align: center;
+
+}
+
+.rover-object small {
+
+    display: block;
+
+    font-size: 9px;
+
+    color: white;
+
+}
+
+
+/* Astronaut */
+
+.astronaut {
+
+    position: absolute;
+
+    bottom: 75px;
+
+    left: 10%;
+
+    font-size: 65px;
+
+    z-index: 5;
+
+    width: 85px;
+
+    height: 100px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transform-origin: center bottom;
+
+    filter: drop-shadow(0 5px 5px black);
+
+}
+
+
+/* Walking animation */
+
+.astronaut.walking {
+
+    animation: astronautWalk 0.35s infinite alternate;
+
+}
+
+
+@keyframes astronautWalk {
+
+    from {
+
+        transform: translateY(0) rotate(-8deg);
+
+    }
+
+    to {
+
+        transform: translateY(-7px) rotate(8deg);
+
+    }
+
+}
+
+
+/* Movement instructions */
+
+.movement-info {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 20px;
+
+    color: white;
+
+    font-size: 11px;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    padding: 10px;
+
+    border-radius: 5px;
+
+}
+
+
+/* Movement controls */
+
+.movement-controls {
+
+    position: absolute;
+
+    bottom: 15px;
+
+    right: 20px;
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+.movement-controls button {
+
+    width: 48px;
+
+    height: 45px;
+
+    font-size: 20px;
+
+    margin: 0;
+
+    background: rgba(20, 15, 15, 0.85);
+
+    border: 1px solid #ff8b54;
+
+}
+
+
+/* ==================================
+   RESOURCE DASHBOARD
+================================== */
+
+.card {
+
+    background: linear-gradient(
+        145deg,
+        #29202a,
+        #17131b
+    );
+
+    border: 1px solid #58372e;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
+    transition: transform 0.2s;
+
+}
+
+.card:hover {
+
+    transform: translateY(-5px);
+
+}
+
+.card h3 {
+
+    color: #ff955b;
+
+}
+
+.progress {
+
+    background: #463a3a;
+
+    height: 12px;
+
+}
+
+.progress div {
+
+    background: linear-gradient(
+        90deg,
+        #ff4d2d,
+        #ffb347
+    );
+
+    border-radius: 10px;
+
+}
+
+
+/* ==================================
+   MISSION PANELS
+================================== */
+
+.panel {
+
+    background: #211a23;
+
+    border: 1px solid #50352e;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+
+}
+
+.panel h2 {
+
+    color: #ff955b;
+
+}
+
+
+/* ==================================
+   ACTION BUTTONS
+================================== */
+
+.actions button {
+
+    background: linear-gradient(
+        135deg,
+        #783d2c,
+        #48251f
+    );
+
+    border: 1px solid #b96842;
+
+    transition: 0.2s;
+
+}
+
+.actions button:hover {
+
+    background: #b65331;
+
+    transform: translateY(-3px);
+
+}
+
+
+/* ==================================
+   MOBILE
+================================== */
+
+@media(max-width: 700px) {
+
+    .hero-screen {
+
+        padding: 25px;
+
+        min-height: 450px;
+
+    }
+
+    .game-world {
+
+        height: 350px;
+
+    }
+
+    .resources {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .habitat-object {
+
+        right: 10%;
+
+    }
+
+    .movement-info {
+
+        font-size: 9px;
+
+    }
+
+}
