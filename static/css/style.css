@@ -1,842 +1,1274 @@
+
+/* =================================
+   GLOBAL
+================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --mars-background: url("/static/images/MarsPIA26367.jpg");
+    --orange: #ff783e;
+    --dark: #151018;
+}
+
 body {
-
     font-family: Arial, sans-serif;
-
-    background: #111827;
-
+    background: var(--dark);
     color: white;
+}
 
+[hidden] {
+    display: none !important;
 }
 
 header {
-
-    background: #1f2937;
-
-    padding: 22px;
-
+    background: #171018;
+    padding: 20px 30px;
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
+    border-bottom: 1px solid #793b2b;
+}
 
+header h2 {
+    color: var(--orange);
+    letter-spacing: 2px;
 }
 
 header span {
-
-    color: #f97316;
-
-    font-size: 13px;
-
+    font-size: 12px;
+    color: #ffbd9b;
 }
 
 main {
-
-    width: 90%;
-
-    max-width: 1100px;
-
+    width: 92%;
+    max-width: 1200px;
     margin: 30px auto;
-
-}
-
-.hero {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 25px;
-
-    margin-bottom: 40px;
-
-}
-
-.hero h1 {
-
-    font-size: 38px;
-
-    color: #fb923c;
-
-    margin-bottom: 15px;
-
-}
-
-.hero p {
-
-    line-height: 1.7;
-
-    margin-bottom: 20px;
-
-}
-
-.hero img {
-
-    width: 45%;
-
-    border-radius: 15px;
-
 }
 
 button {
-
-    background: #f97316;
-
-    color: white;
-
     border: none;
-
+    background: #e85b2b;
+    color: white;
     padding: 13px 20px;
-
-    border-radius: 8px;
-
+    border-radius: 7px;
     cursor: pointer;
-
     font-weight: bold;
-
-    margin: 5px;
-
+    transition: 0.2s;
 }
 
 button:hover {
-
-    background: #ea580c;
-
+    background: #ff793d;
+    transform: translateY(-2px);
 }
 
 button:disabled {
-
-    opacity: 0.5;
-
+    opacity: 0.4;
     cursor: not-allowed;
-
 }
 
-.resources {
 
-    display: grid;
+/* =================================
+   LANDING SCREEN
+================================= */
 
-    grid-template-columns: repeat(4, 1fr);
+.hero-screen {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    padding: 60px;
 
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10, 5, 10, 0.95),
+            rgba(10, 5, 10, 0.2)
+        ),
+        var(--mars-background);
+
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 15px;
+}
+
+.hero-content {
+    max-width: 550px;
+}
+
+.game-label {
+    color: #ff9c65;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.hero-content h1 {
+    font-size: clamp(45px, 7vw, 75px);
+    margin-bottom: 20px;
+}
+
+.hero-content h1 span {
+    color: #ff713b;
+}
+
+.hero-content p {
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #ead9d0;
+}
+
+.start-game-btn {
+    font-size: 17px;
+    padding: 18px 35px;
+    box-shadow: 0 0 20px #ff6a364d;
+}
+
+.hero-info {
+    margin-top: 25px;
+    color: #ffc09f;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+
+/* =================================
+   EXPLORATION AND DASHBOARD HEADINGS
+================================= */
+
+.exploration-heading,
+.dashboard-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 15px;
-
-    margin: 25px 0;
-
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-.card, .panel {
+.exploration-heading h2,
+.dashboard-heading h2 {
+    color: #ff965e;
+    margin-bottom: 6px;
+}
 
-    background: #1f2937;
+.exploration-heading p,
+.dashboard-heading p {
+    color: #c9b6ac;
+    font-size: 13px;
+}
 
-    padding: 20px;
+.mission-day {
+    color: #ffc09f;
+    font-weight: bold;
+    background: #30202a;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 1px solid #79452f;
+}
+
+
+/* =================================
+   QUICK RESOURCE SUMMARY
+================================= */
+
+.quick-resources {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 15px 0 22px;
+}
+
+.quick-resources div {
+    background: linear-gradient(135deg, #30202a, #211a23);
+    border: 1px solid #75412f;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #f5d6c5;
+    box-shadow: 0 4px 12px #0004;
+}
+
+.quick-resources span {
+    display: block;
+    margin-top: 7px;
+    color: #ff995f;
+    font-size: 21px;
+}
+
+
+/* =================================
+   MARS GAME WORLD
+================================= */
+
+.game-world {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+
+    border-radius: 15px;
+    border: 2px solid #a65336;
+
+    background: #a34d32;
+
+    margin: 20px 0;
+
+    isolation: isolate;
+}
+
+.scene-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 2600px;
+    height: 100%;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(25, 10, 15, 0.05),
+            rgba(25, 10, 15, 0.2)
+        ),
+        url("/static/images/MarsPIA26367.jpg");
+
+    background-size: 1300px 100%;
+    background-repeat: repeat-x;
+    background-position: left center;
+
+    transition: transform 0.08s linear;
+}
+
+.mars-ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 105px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8c3d25,
+            #562719
+        );
+
+    border-top: 5px solid #bd7048;
+}
+
+.mars-ground::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(#e18c57 2px, transparent 3px),
+        radial-gradient(#4b2018 2px, transparent 3px);
+
+    background-size: 70px 40px, 100px 60px;
+}
+
+
+/* =================================
+   PLANET LABEL
+================================= */
+
+.planet-label {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+
+    z-index: 8;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    text-shadow: 2px 2px 5px black;
+}
+
+.planet-label span {
+    display: block;
+    font-size: 11px;
+    color: #ffc19f;
+    margin-top: 5px;
+}
+
+
+/* =================================
+   MARS LOCATIONS
+================================= */
+
+.mars-location {
+    position: absolute;
+    bottom: 100px;
+
+    width: 150px;
+    height: 120px;
+
+    padding: 8px;
+
+    background: rgba(35, 15, 12, 0.25);
+
+    border: 1px solid rgba(255, 200, 160, 0.35);
 
     border-radius: 12px;
 
-    margin-bottom: 20px;
+    z-index: 3;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: white;
+
+    transition: 0.3s;
 }
 
-.card h3 {
-
-    color: #fb923c;
-
-    font-size: 15px;
-
+.mars-location:hover {
+    background: rgba(255, 120, 60, 0.35);
+    border-color: #ffae80;
 }
 
-.card h2 {
-
-    margin: 15px 0;
-
+.location-icon {
+    font-size: 65px;
+    filter: drop-shadow(0 5px 5px black);
 }
 
-.progress {
+.mars-location small {
+    font-size: 10px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px black;
+}
 
-    height: 10px;
+.habitat-location {
+    left: 350px;
+}
 
-    background: #374151;
+.greenhouse-location {
+    left: 700px;
+}
+
+.power-location {
+    left: 1050px;
+}
+
+.water-location {
+    left: 1400px;
+}
+
+.oxygen-location {
+    left: 1750px;
+}
+
+.rover-location {
+    left: 2150px;
+}
+
+
+/* =================================
+   ASTRONAUT
+================================= */
+
+.astronaut {
+    position: absolute;
+
+    left: 100px;
+    bottom: 75px;
+
+    width: 85px;
+    height: 125px;
+
+    z-index: 6;
+
+    transform-origin: center bottom;
+
+    transition: filter 0.3s;
+}
+
+.astronaut-body {
+    position: relative;
+    width: 85px;
+    height: 125px;
+
+    animation: astronautIdle 1.5s infinite ease-in-out;
+}
+
+.astronaut-head {
+    position: absolute;
+    top: 0;
+    left: 22px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #f5f2e8;
+    border: 4px solid #b4b4b4;
+
+    z-index: 5;
+}
+
+.helmet-glass {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+
+    width: 25px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #77c7d8,
+        #143b55
+    );
+
+    border: 2px solid #243e51;
+}
+
+.astronaut-torso {
+    position: absolute;
+    top: 38px;
+    left: 18px;
+
+    width: 50px;
+    height: 55px;
+
+    background: #f2eee2;
+
+    border: 3px solid #b6b2a7;
+    border-radius: 12px;
+}
+
+.suit-badge {
+    position: absolute;
+    top: 15px;
+    left: 12px;
+
+    font-size: 8px;
+    font-weight: bold;
+    color: #db402c;
+}
+
+.backpack {
+    position: absolute;
+    top: 43px;
+    left: 5px;
+
+    width: 18px;
+    height: 42px;
+
+    background: #c8c4b7;
+    border: 3px solid #8e8c83;
+    border-radius: 5px;
+}
+
+.astronaut-arm {
+    position: absolute;
+    top: 48px;
+
+    width: 14px;
+    height: 39px;
+
+    background: #eee9dc;
+    border: 3px solid #b3aea3;
+
+    border-radius: 10px;
+    transform-origin: top center;
+}
+
+.arm-left {
+    left: 10px;
+    transform: rotate(15deg);
+}
+
+.arm-right {
+    right: 8px;
+    transform: rotate(-15deg);
+}
+
+.astronaut-leg {
+    position: absolute;
+    top: 85px;
+
+    width: 17px;
+    height: 36px;
+
+    background: #e9e4d8;
+    border: 3px solid #b5b0a4;
+
+    border-radius: 8px;
+
+    transform-origin: top center;
+}
+
+.leg-left {
+    left: 24px;
+}
+
+.leg-right {
+    left: 47px;
+}
+
+.astronaut.facing-left {
+    transform: scaleX(-1);
+}
+
+.astronaut.walking .astronaut-body {
+    animation: astronautWalkBody 0.35s infinite alternate;
+}
+
+.astronaut.walking .leg-left {
+    animation: leftLegWalk 0.35s infinite alternate;
+}
+
+.astronaut.walking .leg-right {
+    animation: rightLegWalk 0.35s infinite alternate;
+}
+
+.astronaut.walking .arm-left {
+    animation: leftArmWalk 0.35s infinite alternate;
+}
+
+.astronaut.walking .arm-right {
+    animation: rightArmWalk 0.35s infinite alternate;
+}
+
+@keyframes astronautIdle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes astronautWalkBody {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes leftLegWalk {
+    from {
+        transform: rotate(25deg);
+    }
+
+    to {
+        transform: rotate(-25deg);
+    }
+}
+
+@keyframes rightLegWalk {
+    from {
+        transform: rotate(-25deg);
+    }
+
+    to {
+        transform: rotate(25deg);
+    }
+}
+
+@keyframes leftArmWalk {
+    from {
+        transform: rotate(-20deg);
+    }
+
+    to {
+        transform: rotate(20deg);
+    }
+}
+
+@keyframes rightArmWalk {
+    from {
+        transform: rotate(20deg);
+    }
+
+    to {
+        transform: rotate(-20deg);
+    }
+}
+
+
+/* =================================
+   DUST PARTICLES
+================================= */
+
+.dust-layer {
+    position: absolute;
+    inset: 0;
+
+    z-index: 7;
+
+    pointer-events: none;
+    overflow: hidden;
+
+    opacity: 0.65;
+    transition: opacity 0.5s;
+}
+
+.dust-particle {
+    position: absolute;
+
+    left: -20px;
+    top: var(--particle-y);
+
+    width: var(--particle-size);
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 190, 120, 0.85);
+
+    box-shadow: 0 0 6px rgba(255, 160, 80, 0.7);
+
+    animation: dustMove var(--particle-duration) linear infinite;
+
+    animation-delay: var(--particle-delay);
+}
+
+@keyframes dustMove {
+    0% {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateX(1300px);
+        opacity: 0;
+    }
+}
+
+
+/* =================================
+   WEATHER
+================================= */
+
+.weather-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    transition: background 1s;
+}
+
+.clear-weather .weather-overlay {
+    background: transparent;
+}
+
+.light-dust .weather-overlay {
+    background: rgba(200, 105, 55, 0.15);
+}
+
+.dust-storm .weather-overlay {
+    background: rgba(190, 65, 30, 0.38);
+    animation: stormFlash 2s infinite alternate;
+}
+
+.severe-storm .weather-overlay {
+    background: rgba(65, 25, 20, 0.65);
+    animation: stormFlash 1.5s infinite alternate;
+}
+
+@keyframes stormFlash {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.game-world.dust-storm .dust-layer,
+.game-world.severe-storm .dust-layer {
+    opacity: 1;
+}
+
+.game-world.dust-storm .dust-particle,
+.game-world.severe-storm .dust-particle {
+    height: 5px;
+    animation-duration: 1s !important;
+    background: #ffd0a0;
+}
+
+.weather-status {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    background: #140d0dcc;
+
+    padding: 10px 15px;
+    border-radius: 7px;
+
+    z-index: 10;
+
+    font-size: 12px;
+}
+
+#weatherText {
+    color: #ffb36e;
+    font-weight: bold;
+}
+
+
+/* =================================
+   WARNINGS
+================================= */
+
+.warning-banner {
+    position: absolute;
+    top: 75px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 15;
+
+    padding: 13px 22px;
+
+    border-radius: 7px;
+
+    background: #a82020;
+    border: 1px solid #ff8585;
+
+    font-weight: bold;
+    text-align: center;
+
+    animation: warningBlink 0.8s infinite alternate;
+}
+
+@keyframes warningBlink {
+    from {
+        opacity: 0.65;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =================================
+   MOVEMENT CONTROLS
+================================= */
+
+.movement-info {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+
+    z-index: 10;
+
+    background: #0009;
+
+    padding: 10px;
+    border-radius: 5px;
+
+    font-size: 10px;
+}
+.movement-controls {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.horizontal-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.movement-controls button {
+    width: 45px;
+    height: 42px;
+    padding: 0;
+
+    font-size: 19px;
+
+    background: #211717dd;
+    border: 1px solid #ff8b54;
+
+    touch-action: none;
+    user-select: none;
+}
+
+
+
+/* =================================
+   LOCATION INFO
+================================= */
+
+.location-info {
+    background: #30202a;
+    border: 1px solid #a65336;
+
+    padding: 18px;
 
     border-radius: 10px;
 
-    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-.progress div {
-
-    height: 100%;
-
-    width: 100%;
-
-    background: #22c55e;
-
-    transition: width 0.4s;
-
+.location-info h3 {
+    color: #ffad76;
+    margin-bottom: 8px;
 }
 
-.actions {
-
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 10px;
-
-    margin-top: 20px;
-
+.location-info p {
+    color: #e8d5c9;
+    line-height: 1.6;
 }
 
-.actions button {
 
-    min-height: 55px;
+/* =================================
+   MISSION ACTIONS
+================================= */
 
+#explorationScreen > .panel {
+    margin-top: 22px;
+}
+
+.panel {
+    background: #211a23;
+    border: 1px solid #50352e;
+
+    padding: 20px;
+    border-radius: 12px;
+
+    margin-bottom: 20px;
 }
 
 .panel h2 {
-
     margin-bottom: 18px;
-
-    color: #fb923c;
-
+    color: #ff955b;
 }
 
 .panel p {
-
     line-height: 1.7;
+}
 
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.actions button {
+    min-height: 55px;
+    background: #713c2b;
+    border: 1px solid #b96842;
+}
+
+.actions button:hover {
+    background: #a44f30;
 }
 
 #eventBox {
-
     background: #7c2d12;
-
     padding: 15px;
-
     margin: 15px 0;
-
     border-radius: 8px;
-
+    line-height: 1.6;
 }
 
-#reportResources {
+#advanceBtn {
+    margin-top: 15px;
+    min-width: 150px;
+    background: #e85b2b;
+}
 
+#advanceBtn:hover {
+    background: #ff793d;
+}
+
+
+/* =================================
+   EXPLORATION FOOTER
+================================= */
+
+.exploration-footer {
+    background: #211a23;
+    border: 1px solid #50352e;
+
+    padding: 18px;
+    border-radius: 10px;
+
+    line-height: 1.8;
+    color: #e5c6b5;
+    font-size: 13px;
+}
+
+
+/* =================================
+   DASHBOARD RESOURCES
+================================= */
+
+.resources {
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 12px;
-
+    gap: 15px;
     margin: 25px 0;
+}
 
+.card {
+    background: #211a23;
+    border: 1px solid #50352e;
+
+    padding: 20px;
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    color: #ff955b;
+    font-size: 15px;
+}
+
+.card h2 {
+    margin: 15px 0;
+}
+
+.progress {
+    height: 12px;
+    background: #463a3a;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress div {
+    height: 100%;
+    width: 100%;
+
+    background: #26c46a;
+
+    transition: width 0.5s, background 0.5s;
+}
+
+
+/* =================================
+   DASHBOARD PANELS
+================================= */
+
+.graph-panel p {
+    color: #c9b6ac;
+    margin-bottom: 15px;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 320px;
+}
+
+#activityLog {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+
+/* =================================
+   LOW RESOURCE EFFECTS
+================================= */
+
+body.low-oxygen {
+    animation: oxygenScreen 1s infinite alternate;
+}
+
+@keyframes oxygenScreen {
+    from {
+        box-shadow: inset 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+
+    to {
+        box-shadow: inset 0 0 100px 15px rgba(255, 0, 0, 0.45);
+    }
+}
+
+body.critical-oxygen .game-world {
+    border-color: red;
+}
+
+.game-world.power-critical {
+    filter: brightness(0.45);
+}
+
+#game.low-power .card:first-child {
+    border: 2px solid red;
+}
+
+
+/* =================================
+   REPORT
+================================= */
+
+#reportResources {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 25px 0;
 }
 
 #reportResources div {
-
     background: #374151;
-
     padding: 15px;
-
     border-radius: 8px;
-
 }
 
 footer {
-
     text-align: center;
-
     padding: 25px;
-
-    color: #9ca3af;
-
+    color: #aaa;
 }
+
+
+/* =================================
+   MOBILE
+================================= */
 
 @media(max-width: 750px) {
 
-    .hero {
-
+    header {
         flex-direction: column;
-
+        gap: 10px;
+        text-align: center;
     }
 
-    .hero img {
+    .hero-screen {
+        padding: 25px;
+        min-height: 450px;
+    }
 
-        width: 100%;
-
+    .game-world {
+        height: 380px;
     }
 
     .resources {
-
         grid-template-columns: repeat(2, 1fr);
+    }
 
+    .quick-resources {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .actions {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
 
     #reportResources {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
 
+    .movement-info {
+        font-size: 8px;
+    }
+
+    .exploration-heading,
+    .dashboard-heading {
+        align-items: flex-start;
+    }
+
+    .chart-container {
+        height: 260px;
+    }
 }
 
 @media(max-width: 450px) {
 
-    header {
-
-        flex-direction: column;
-
-        gap: 10px;
-
-    }
-
-}
-
-/* ==================================
-   GAMING INTERFACE
-================================== */
-
-body {
-
-    background: #100c12;
-
-    color: white;
-
-    font-family: Arial, sans-serif;
-
-}
-
-
-/* ==================================
-   GAME HEADER
-================================== */
-
-header {
-
-    background: rgba(15, 10, 15, 0.95);
-
-    border-bottom: 1px solid #713c2d;
-
-    padding: 18px 30px;
-
-}
-
-header h2 {
-
-    color: #ff8c42;
-
-    letter-spacing: 2px;
-
-}
-
-
-/* ==================================
-   LANDING SCREEN
-================================== */
-
-.hero-screen {
-
-    min-height: 600px;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 60px;
-
-    border-radius: 18px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            rgba(10, 8, 12, 0.95),
-            rgba(10, 8, 12, 0.3)
-        ),
-
-        url("/static/images/mars-landscape.jpg");
-
-    background-size: cover;
-
-    background-position: center;
-
-    margin-bottom: 35px;
-
-}
-
-.hero-content {
-
-    max-width: 550px;
-
-}
-
-.game-label {
-
-    color: #ff9b54;
-
-    letter-spacing: 4px;
-
-    font-size: 13px;
-
-    margin-bottom: 25px;
-
-}
-
-.hero-content h1 {
-
-    font-size: clamp(42px, 6vw, 70px);
-
-    line-height: 1.1;
-
-    color: white;
-
-    margin-bottom: 20px;
-
-}
-
-.hero-content h1 span {
-
-    color: #ff763c;
-
-}
-
-.hero-content p {
-
-    font-size: 17px;
-
-    line-height: 1.8;
-
-    color: #e5d5cd;
-
-    margin-bottom: 30px;
-
-}
-
-.start-game-btn {
-
-    background: linear-gradient(
-        90deg,
-        #ff6b35,
-        #e63d20
-    );
-
-    padding: 18px 35px;
-
-    font-size: 16px;
-
-    border-radius: 8px;
-
-    box-shadow: 0 0 25px rgba(255, 90, 30, 0.4);
-
-}
-
-.start-game-btn:hover {
-
-    transform: scale(1.05);
-
-}
-
-.hero-info {
-
-    margin-top: 25px;
-
-    font-size: 12px;
-
-    color: #ffb18b;
-
-    letter-spacing: 2px;
-
-}
-
-
-/* ==================================
-   MARS GAME ENVIRONMENT
-================================== */
-
-.game-world {
-
-    position: relative;
-
-    width: 100%;
-
-    height: 470px;
-
-    overflow: hidden;
-
-    border-radius: 15px;
-
-    margin: 25px 0;
-
-    border: 2px solid #a64e36;
-
-    background-image:
-
-        linear-gradient(
-            180deg,
-            rgba(25, 15, 25, 0.05),
-            rgba(30, 10, 10, 0.15)
-        ),
-
-        url("/static/images/mars-landscape.jpg");
-
-    background-size: cover;
-
-    background-position: center;
-
-}
-
-
-/* Mars label */
-
-.planet-label {
-
-    position: absolute;
-
-    top: 20px;
-
-    left: 20px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-    color: white;
-
-    text-shadow: 2px 2px 5px black;
-
-}
-
-.planet-label span {
-
-    display: block;
-
-    font-size: 11px;
-
-    color: #ffc09d;
-
-    margin-top: 5px;
-
-}
-
-
-/* Habitat */
-
-.habitat-object {
-
-    position: absolute;
-
-    right: 15%;
-
-    bottom: 100px;
-
-    font-size: 65px;
-
-    text-align: center;
-
-    filter: drop-shadow(0 5px 5px black);
-
-}
-
-.habitat-object small {
-
-    display: block;
-
-    font-size: 10px;
-
-    color: white;
-
-}
-
-
-/* Rover */
-
-.rover-object {
-
-    position: absolute;
-
-    right: 38%;
-
-    bottom: 85px;
-
-    font-size: 45px;
-
-    text-align: center;
-
-}
-
-.rover-object small {
-
-    display: block;
-
-    font-size: 9px;
-
-    color: white;
-
-}
-
-
-/* Astronaut */
-
-.astronaut {
-
-    position: absolute;
-
-    bottom: 75px;
-
-    left: 10%;
-
-    font-size: 65px;
-
-    z-index: 5;
-
-    width: 85px;
-
-    height: 100px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    transform-origin: center bottom;
-
-    filter: drop-shadow(0 5px 5px black);
-
-}
-
-
-/* Walking animation */
-
-.astronaut.walking {
-
-    animation: astronautWalk 0.35s infinite alternate;
-
-}
-
-
-@keyframes astronautWalk {
-
-    from {
-
-        transform: translateY(0) rotate(-8deg);
-
-    }
-
-    to {
-
-        transform: translateY(-7px) rotate(8deg);
-
-    }
-
-}
-
-
-/* Movement instructions */
-
-.movement-info {
-
-    position: absolute;
-
-    bottom: 20px;
-
-    left: 20px;
-
-    color: white;
-
-    font-size: 11px;
-
-    background: rgba(0, 0, 0, 0.6);
-
-    padding: 10px;
-
-    border-radius: 5px;
-
-}
-
-
-/* Movement controls */
-
-.movement-controls {
-
-    position: absolute;
-
-    bottom: 15px;
-
-    right: 20px;
-
-    display: flex;
-
-    gap: 10px;
-
-}
-
-.movement-controls button {
-
-    width: 48px;
-
-    height: 45px;
-
-    font-size: 20px;
-
-    margin: 0;
-
-    background: rgba(20, 15, 15, 0.85);
-
-    border: 1px solid #ff8b54;
-
-}
-
-
-/* ==================================
-   RESOURCE DASHBOARD
-================================== */
-
-.card {
-
-    background: linear-gradient(
-        145deg,
-        #29202a,
-        #17131b
-    );
-
-    border: 1px solid #58372e;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-
-    transition: transform 0.2s;
-
-}
-
-.card:hover {
-
-    transform: translateY(-5px);
-
-}
-
-.card h3 {
-
-    color: #ff955b;
-
-}
-
-.progress {
-
-    background: #463a3a;
-
-    height: 12px;
-
-}
-
-.progress div {
-
-    background: linear-gradient(
-        90deg,
-        #ff4d2d,
-        #ffb347
-    );
-
-    border-radius: 10px;
-
-}
-
-
-/* ==================================
-   MISSION PANELS
-================================== */
-
-.panel {
-
-    background: #211a23;
-
-    border: 1px solid #50352e;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-
-}
-
-.panel h2 {
-
-    color: #ff955b;
-
-}
-
-
-/* ==================================
-   ACTION BUTTONS
-================================== */
-
-.actions button {
-
-    background: linear-gradient(
-        135deg,
-        #783d2c,
-        #48251f
-    );
-
-    border: 1px solid #b96842;
-
-    transition: 0.2s;
-
-}
-
-.actions button:hover {
-
-    background: #b65331;
-
-    transform: translateY(-3px);
-
-}
-
-
-/* ==================================
-   MOBILE
-================================== */
-
-@media(max-width: 700px) {
-
-    .hero-screen {
-
-        padding: 25px;
-
-        min-height: 450px;
-
+    main {
+        width: 95%;
+        margin: 15px auto;
     }
 
     .game-world {
-
-        height: 350px;
-
+        height: 330px;
     }
 
     .resources {
-
-        grid-template-columns: repeat(2, 1fr);
-
+        gap: 8px;
     }
 
-    .habitat-object {
-
-        right: 10%;
-
+    .card {
+        padding: 12px;
     }
 
-    .movement-info {
-
-        font-size: 9px;
-
+    .quick-resources div {
+        font-size: 12px;
+        padding: 12px 5px;
     }
 
+    .quick-resources span {
+        font-size: 18px;
+    }
+
+    .weather-status {
+        top: 65px;
+        right: 10px;
+    }
+
+    .mars-location {
+        transform: scale(0.85);
+        transform-origin: bottom center;
+    }
+
+    .actions {
+        grid-template-columns: 1fr;
+    }
+
+    .exploration-heading button,
+    .dashboard-heading button {
+        width: 100%;
+    }
+}
+
+/* =================================
+   MARS STATION IMAGES
+================================= */
+
+.mars-location {
+    height: 150px;
+    width: 170px;
+    background: transparent;
+    border: none;
+    bottom: 100px;
+}
+
+.station-image {
+    width: 145px;
+    height: 105px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 6px 8px #0008);
+    transition: transform 0.3s;
+}
+
+.mars-location:hover .station-image {
+    transform: scale(1.12);
+}
+
+.mars-location small {
+    color: white;
+    background: #24130dcc;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+/* =================================
+   SELECTED STATION BACKGROUND
+================================= */
+
+/* =================================
+   STATION BACKGROUND
+================================= */
+
+.station-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.5s ease;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+.game-world.station-view-active .station-backdrop {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hide original Mars landscape while viewing a station */
+
+.scene-track {
+    position: relative;
+    z-index: 2;
+}
+
+.astronaut {
+    z-index: 10;
+}
+
+.mars-location {
+    z-index: 5;
+}
+
+.movement-controls {
+    position: absolute;
+    z-index: 20;
+}
+/* Show selected station background */
+.game-world.station-view-active .scene-track {
+    background-image: none !important;
+    background-color: transparent;
+}
+
+/* Keep astronaut and stations visible */
+.scene-track {
+    position: relative;
+    z-index: 2;
+}
+
+.station-backdrop {
+    z-index: 1;
+    pointer-events: none;
+}
+
+.astronaut {
+    z-index: 10;
+}
+
+.mars-location {
+    z-index: 5;
 }

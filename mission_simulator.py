@@ -5,59 +5,96 @@ from mission_events import MissionEventManager
 
 class MissionSimulator:
 
-    ACTIONS: ClassVar[dict[str, dict[str, Any]]] ={
+    ACTIONS: ClassVar[dict[str, dict[str, Any]]] = {
 
         "conserve_energy": {
+
             "title": "Conserve Energy",
-            "effects": {"power": 8},
-            "feedback": "You saved electricity by reducing non-essential equipment use."
+
+            "effects": {
+                "power": 8
+            },
+
+            "feedback":
+                "You saved electricity by reducing non-essential equipment use."
+
         },
 
         "repair_solar_panels": {
+
             "title": "Repair Solar Panels",
-            "effects": {"power": -5},
-            "feedback": "The repair used power, but solar generation will improve."
+
+            "effects": {
+                "power": -5
+            },
+
+            "feedback":
+                "The repair used power, but solar generation will improve."
+
         },
 
         "recycle_water": {
+
             "title": "Recycle Water",
+
             "effects": {
                 "water": 12,
                 "power": -4
             },
-            "feedback": "Water was recovered, but the recycling system consumed electricity."
+
+            "feedback":
+                "Water was recovered, but the recycling system consumed electricity."
+
         },
 
         "grow_food": {
+
             "title": "Grow Food",
+
             "effects": {
                 "water": -7,
                 "power": -5
             },
-            "feedback": "The greenhouse is growing food for future days."
+
+            "feedback":
+                "The greenhouse is growing food for future days."
+
         },
 
         "inspect_equipment": {
+
             "title": "Inspect Equipment",
+
             "effects": {
-                "power": -2
+                "power": -2,
+                "oxygen": 5
             },
-            "feedback": "Equipment inspection helps identify possible failures."
+
+            "feedback":
+                "Equipment inspection improved the life-support system."
+
         },
 
         "improve_shielding": {
+
             "title": "Improve Radiation Shielding",
+
             "effects": {
                 "power": -6
             },
-            "feedback": "The crew improved the simulated radiation shelter."
+
+            "feedback":
+                "The crew improved the simulated radiation shelter."
+
         }
 
     }
 
+
     def __init__(self):
 
         self.event_manager = MissionEventManager()
+
 
     def perform_action(self, state, action):
 
@@ -65,26 +102,37 @@ class MissionSimulator:
 
             return False, "Invalid action."
 
+
         if state.status != "ACTIVE":
 
             return False, "Mission has ended."
 
+
         requirements = {
 
-            "repair_solar_panels": {"power": 5},
+            "repair_solar_panels": {
+                "power": 5
+            },
 
-            "recycle_water": {"power": 4},
+            "recycle_water": {
+                "power": 4
+            },
 
             "grow_food": {
                 "power": 5,
                 "water": 7
             },
 
-            "inspect_equipment": {"power": 2},
+            "inspect_equipment": {
+                "power": 2
+            },
 
-            "improve_shielding": {"power": 6}
+            "improve_shielding": {
+                "power": 6
+            }
 
         }
+
 
         for resource, amount in requirements.get(action, {}).items():
 
@@ -92,11 +140,13 @@ class MissionSimulator:
 
                 return False, f"Not enough {resource}."
 
+
         config = self.ACTIONS[action]
 
         state.resources.apply_changes(
             config["effects"]
         )
+
 
         if action == "conserve_energy":
 
@@ -110,6 +160,7 @@ class MissionSimulator:
 
             state.greenhouse_bonus = True
 
+
         state.action_history.append({
 
             "day": state.current_day,
@@ -122,13 +173,17 @@ class MissionSimulator:
 
         })
 
+
         state.feedback = config["feedback"]
 
         return True, state.feedback
 
+
     def apply_daily_changes(self, state):
 
-        power_use = 7 if state.energy_conservation else 11
+        power_use = (
+            7 if state.energy_conservation else 11
+        )
 
         changes = {
 
@@ -142,23 +197,46 @@ class MissionSimulator:
 
         }
 
+
         if state.solar_repair_bonus:
 
             changes["power"] += 5
+
 
         if state.greenhouse_bonus:
 
             changes["food"] += 11
 
+
         state.resources.apply_changes(changes)
+
+
+        # Reset daily bonuses
 
         state.energy_conservation = False
 
+
+        # Generate weather
+
+        weather = self.event_manager.generate_weather(state)
+
+        self.event_manager.apply_weather(
+            state,
+            weather
+        )
+
+
+        # Generate random mission event
+
         event = self.event_manager.generate_event(state)
+
 
         if event:
 
-            self.event_manager.apply_event(state, event)
+            self.event_manager.apply_event(
+                state,
+                event
+            )
 
             state.current_event = event
 
@@ -168,12 +246,23 @@ class MissionSimulator:
 
             state.current_event = None
 
-            state.feedback = (
-                "A quiet day on Mars. "
-                "The habitat systems continue operating."
-            )
+            weather_messages = {
+
+                "clear": "Clear weather. Habitat systems are operating normally.",
+
+                "light_dust": "Light dust is affecting solar generation.",
+
+                "dust_storm": "A dust storm is reducing solar power generation.",
+
+                "severe_storm": "WARNING! A severe Martian dust storm is approaching."
+
+            }
+
+            state.feedback = weather_messages[weather]
+
 
         return event
+
 
     def advance_day(self, state):
 
